@@ -114,8 +114,8 @@ private:
 
 
 // Here we simply add definitions from a file safearray.hpp. It's the same as we 
-// simply put those defitions as a as a continuation of this very file.
-// Not, that neither safearray.h nor safearray.hpp are compiled on their own.
+// simply put those definitions as a as a continuation of this very file.
+// Note that neither safearray.h, nor safearray.hpp are compiled on their own.
 #include "safearray.hpp"
 
 
