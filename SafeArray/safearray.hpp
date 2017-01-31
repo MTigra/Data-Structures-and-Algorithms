@@ -1,9 +1,8 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
 /// \file
 /// \brief     Safearray class methods definition
-/// \author    Sergey Shershakov
-/// \version   0.2.0
-/// \date      30.01.2017
+/// \author    Nikita Marinosyan
+/// \date      31.01.2017
 ///            This is a part of the course "Algorithms and Data Structures" 
 ///            provided by  the School of Software Engineering of the Faculty 
 ///            of Computer Science at the Higher School of Economics.
@@ -48,13 +47,37 @@ namespace xi {
 
     template <class T>
     T& SafeArray<T>::SafeArray(const SafeArray &obj) {
+
+        // Copy array
         _storage = new SafeArray(obj._capacity);
         for (int i = 0; i < _capacity; ++i) {
             _storage[i] = obj[i];
         }
-        this->_capacity = obj._capacity;
+
+        // Set the proper capacity
+        _capacity = obj._capacity;
     }
 
+    template <class T>
+    T& SafeArray::operator[](size_t k) {
+        // Check if the index is in the array bounds
+        checkBounds(k);
 
+        return _storage[k];
+    }
+
+    template <class T>
+    const T& SafeArray::operator[](size_t k) const {
+        // Check if the index is in the array bounds
+        checkBounds(k);
+
+
+        return _storage[k];
+    }
+
+    template <class T>
+    void SafeArray::checkBounds(size_t index) const {
+        if (index > _capacity - 1) throw std::out_of_range("Index out of range!");
+    }
 
 } // namespace xi
