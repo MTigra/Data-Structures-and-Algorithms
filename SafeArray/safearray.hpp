@@ -25,13 +25,36 @@
 namespace xi {
 
 
-template <class T>
-SafeArray<T>::SafeArray(size_t cap)
-{
-    // TODO: этот метод надо дополнить
-}
+    template<class T>
+    SafeArray<T>::SafeArray(size_t cap) {
+        // Allocate memory for the array
+        _storage = new T[cap];
 
-// TODO: здесь должно быть еще несколько методов
+        // Set capacity
+        _capacity = cap;
+    }
+
+    template <class T>
+    SafeArray<T>::~SafeArray() {
+        delete[] _storage;
+        _storage = nullptr;
+        _capacity = 0;
+    }
+
+    template <class T>
+    size_t SafeArray<T>::getCapacity() const {
+        return _capacity;
+    }
+
+    template <class T>
+    T& SafeArray<T>::SafeArray(const SafeArray &obj) {
+        _storage = new SafeArray(obj._capacity);
+        for (int i = 0; i < _capacity; ++i) {
+            _storage[i] = obj[i];
+        }
+        this->_capacity = obj._capacity;
+    }
+
 
 
 } // namespace xi

@@ -3,5 +3,5 @@ project(SafeArray)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp safearray.h safearray.hpp subject.cpp subject.h)
 add_executable(SafeArray ${SOURCE_FILES})
