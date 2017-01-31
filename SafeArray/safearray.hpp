@@ -46,10 +46,10 @@ namespace xi {
     }
 
     template <class T>
-    T& SafeArray<T>::SafeArray(const SafeArray &obj) {
+    SafeArray<T>::SafeArray(const SafeArray &obj) {
 
         // Copy array
-        _storage = new SafeArray(obj._capacity);
+        _storage = new T[obj._capacity];
         for (int i = 0; i < _capacity; ++i) {
             _storage[i] = obj[i];
         }
@@ -59,7 +59,7 @@ namespace xi {
     }
 
     template <class T>
-    T& SafeArray::operator[](size_t k) {
+    T& SafeArray<T>::operator[](size_t k) {
         // Check if the index is in the array bounds
         checkBounds(k);
 
@@ -67,16 +67,15 @@ namespace xi {
     }
 
     template <class T>
-    const T& SafeArray::operator[](size_t k) const {
+    const T& SafeArray<T>::operator[](size_t k) const {
         // Check if the index is in the array bounds
         checkBounds(k);
-
 
         return _storage[k];
     }
 
     template <class T>
-    void SafeArray::checkBounds(size_t index) const {
+    void SafeArray<T>::checkBounds(size_t index) const {
         if (index > _capacity - 1) throw std::out_of_range("Index out of range!");
     }
 

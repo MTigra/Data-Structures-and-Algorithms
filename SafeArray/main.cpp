@@ -24,7 +24,7 @@ int main()
 
 
     // Simple safearray
-    SafeArray<int> sa;
+    //SafeArray<int> sa;
 
 
     return 0;
