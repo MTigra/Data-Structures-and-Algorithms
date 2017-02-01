@@ -27,7 +27,6 @@
 namespace xi {
 
 
-
 /** \brief Класс, определяющий некоторую учебную дисциплину.
  *
  *  Большинство полей класса представлены в открытой области, т.к. у нас нет необходимости
@@ -36,7 +35,8 @@ namespace xi {
  * <b>Вопрос для размышления:</b> как ввести такое же определение «предмета» с использованием
  * ключевого слова \c struct?
  */
-class Subject {
+class Subject
+{
 public:
 
     /** \brief Максимальное число строк в описании дисциплины.
@@ -47,16 +47,18 @@ public:
      *  экземпляре, мы помечаем его \c static -ом.
      */
     static const int MAX_LINES = 10;
-                                        
+
 
 public:
 
     /// Конструктор по умолчанию: инициализирует объекты пустыми строками, кроме массива описания.
-    Subject() : name(""), title("") {}
+    Subject() : name(""), title("")
+    {}
 
     /// Конструктор инициализации \a именем и \a заголовком предмета.
     Subject(std::string name, std::string title) :
-        name(name), title(title) {}
+            name(name), title(title)
+    {}
 
 
 public:
@@ -88,7 +90,7 @@ public:
      *  <span style='color:orange'>подумать, зачем это нужно.</span>
      */
     friend std::ostream& operator<<(std::ostream& outs, const Subject& subj);
-    
+
     /// \brief Дружественная оператор-функция для ввода объекта из потока.
     /// \see Subject::operator<<
     friend std::istream& operator>>(std::istream& ins, Subject& subj);

@@ -24,59 +24,85 @@
 namespace xi {
 
 
-    template<class T>
-    SafeArray<T>::SafeArray(size_t cap) {
-        // Allocate memory for the array
-        _storage = new T[cap];
+template<class T>
+SafeArray<T>::SafeArray(size_t cap)
+{
+    // Allocate memory for the array
+    _storage = new T[cap];
 
-        // Set capacity
-        _capacity = cap;
-    }
+    // Set capacity
+    _capacity = cap;
+}
 
-    template <class T>
-    SafeArray<T>::~SafeArray() {
+template<class T>
+SafeArray<T>::~SafeArray()
+{
+    delete[] _storage;
+    _storage = nullptr;
+    _capacity = 0;
+}
+
+template<class T>
+size_t SafeArray<T>::getCapacity() const
+{
+    return _capacity;
+}
+
+template<class T>
+SafeArray<T>::SafeArray(const SafeArray& obj)
+{
+
+    // Copy array
+    _storage = new T[obj._capacity];
+    std::copy(obj._storage, obj._storage + obj._capacity, _storage);
+
+    // Set the proper capacity
+    _capacity = obj._capacity;
+}
+
+template<class T>
+T& SafeArray<T>::operator[](size_t k)
+{
+    // Check if the index is in the array bounds
+    checkBounds(k);
+
+    return _storage[k];
+}
+
+template<class T>
+const T& SafeArray<T>::operator[](size_t k) const
+{
+    // Check if the index is in the array bounds
+    checkBounds(k);
+
+    return _storage[k];
+}
+
+template<class T>
+void SafeArray<T>::checkBounds(size_t index) const
+{
+    if (index > _capacity - 1) throw std::out_of_range("Index out of range!");
+}
+
+template<class T>
+SafeArray <T>& SafeArray<T>::operator=(const SafeArray <T>& other)
+{
+    if (this != &other)
+    { // Self-assignment check
+
+        // Delete this storage
         delete[] _storage;
-        _storage = nullptr;
-        _capacity = 0;
-    }
 
-    template <class T>
-    size_t SafeArray<T>::getCapacity() const {
-        return _capacity;
-    }
-
-    template <class T>
-    SafeArray<T>::SafeArray(const SafeArray &obj) {
+        // Create new storage in this
+        _storage = new T[other._capacity];
+        _capacity = other._capacity;
 
         // Copy array
-        _storage = new T[obj._capacity];
-        for (int i = 0; i < _capacity; ++i) {
-            _storage[i] = obj[i];
-        }
-
-        // Set the proper capacity
-        _capacity = obj._capacity;
+        std::copy(other._storage, other._storage + other._capacity, _storage);
     }
 
-    template <class T>
-    T& SafeArray<T>::operator[](size_t k) {
-        // Check if the index is in the array bounds
-        checkBounds(k);
+    return *this;
+}
 
-        return _storage[k];
-    }
-
-    template <class T>
-    const T& SafeArray<T>::operator[](size_t k) const {
-        // Check if the index is in the array bounds
-        checkBounds(k);
-
-        return _storage[k];
-    }
-
-    template <class T>
-    void SafeArray<T>::checkBounds(size_t index) const {
-        if (index > _capacity - 1) throw std::out_of_range("Index out of range!");
-    }
 
 } // namespace xi
