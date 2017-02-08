@@ -22,7 +22,7 @@ void DNAElement::readFromString(const std::string& description)
     id = c;
 
     c = description[1];
-    if (c < '0' || c > '9')
+    if (c < '1' || c > '9')
     {
         throw std::invalid_argument("Incorrect DNA format: invalid number!");
     }
@@ -38,4 +38,8 @@ void DNAElement::readFromString(const std::string& description)
 }
 
 DNAElement::DNAElement()
-{}
+{
+    id = "";
+    number = 0;
+    base = NitrogenousBase::Undefined;
+}

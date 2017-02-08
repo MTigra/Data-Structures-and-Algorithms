@@ -22,6 +22,7 @@ LinkedList<T>::LinkedList()
 {
     // Creation of the dummy/sentinel element
     _preHead = new Node<T>;
+    _preHead->value = 0;
     _preHead->next = nullptr;
 }
 
@@ -37,7 +38,7 @@ LinkedList<T>::~LinkedList()
 template <class T>
 void LinkedList<T>::copy(Node <T>* from_preHead, Node <T>* to_preHead)
 {
-    Node<T>* from_iter = from_preHead;
+    Node<T>* from_iter = from_preHead->next;
     Node<T>* to_iter = to_preHead;
     while (from_iter)
     {
@@ -55,6 +56,8 @@ void LinkedList<T>::copy(Node <T>* from_preHead, Node <T>* to_preHead)
 template <class T>
 LinkedList<T>::LinkedList(const LinkedList& other)
 {
+    _preHead = new Node<T>;
+    _preHead->value = 0;
     copy(other._preHead, _preHead);
 }
 
@@ -121,7 +124,8 @@ void LinkedList<T>::addElementToEnd(T& value)
     // Create new node and add it to the end
     Node<T>* new_node = new Node<T>;
     new_node->value = value;
-    getLastNode()->next = new_node;
+    Node<T>* last_node = getLastNode();
+    last_node->next = new_node;
 }
 
 template <class T>
@@ -157,17 +161,15 @@ void LinkedList<T>::moveNodeAfter(Node <T>* pNode, Node <T>* pNodeBefore)
 template <class T>
 void LinkedList<T>::moveNodesAfter(Node <T>* pNode, Node <T>* pNodeBefore, Node <T>* pNodeLast)
 {
-    Node<T>* current_node = pNodeBefore;
     Node<T>* current_other = pNode;
-    while (current_node->next != pNodeLast)
+    while (pNodeBefore->next != pNodeLast)
     {
-        moveNodeAfter(current_other, current_node);
+        moveNodeAfter(current_other, pNodeBefore);
         current_other = current_other->next;
-        current_node = current_node->next;
     }
 
     // Move the last one
-    moveNodeAfter(current_other, current_node);
+    moveNodeAfter(current_other, pNodeBefore);
 }
 
 template <class T>
@@ -175,7 +177,7 @@ Node<T>* LinkedList<T>::getLastNode()
 {
     // Get the last node
     Node<T>* last_node = _preHead;
-    while(last_node)
+    while(last_node->next)
         last_node = last_node->next;
 
     return last_node;
@@ -187,21 +189,19 @@ void LinkedList<T>::moveNodeToEnd(Node <T>* pNodeBefore)
     // Get the last node
     Node<T>* last_node = getLastNode();
 
-    moveNodeAfter(last_node, pNodeBefore->next);
+    moveNodeAfter(last_node, pNodeBefore);
 }
 
 template <class T>
 void LinkedList<T>::moveNodesToEnd(Node <T>* pNodeBefore, Node <T>* pNodeLast)
 {
-    Node<T>* current_node = pNodeBefore;
-    while (current_node->next != pNodeLast)
+    while (pNodeBefore->next != pNodeLast)
     {
-        moveNodeToEnd(current_node);
-        current_node = current_node->next;
+        moveNodeToEnd(pNodeBefore);
     }
 
     // Move the last one
-    moveNodeToEnd(current_node);
+    moveNodeToEnd(pNodeBefore);
 }
 
 

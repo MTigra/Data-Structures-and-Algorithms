@@ -30,7 +30,14 @@ public:
     /// Конструктор инициализации строкой
     DNAElement(const std::string& description);
 
-    enum NitrogenousBase { Adenine = 'A', Guanine = 'G', Thymine = 'T', Cytosine = 'C' };
+    enum NitrogenousBase
+    {
+        Undefined = 'u',
+        Adenine = 'A',
+        Guanine = 'G',
+        Thymine = 'T',
+        Cytosine = 'C'
+    };
 
 public:
     /**
