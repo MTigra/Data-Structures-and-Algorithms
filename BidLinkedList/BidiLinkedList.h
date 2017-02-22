@@ -11,15 +11,13 @@
 ///
 /// When altering code, a copyright line must be preserved.
 ///////////////////////////////////////////////////////////////////////////////
-
+#define IWANNAGET10POINTS
 
 
 #ifndef XI_ENHLINKEDLIST_BIDILIST_H_
 #define XI_ENHLINKEDLIST_BIDILIST_H_
 
 //#include <vector>
-
-
 
 /** \brief Declares a generic purpose bidirectional list
  *
@@ -165,7 +163,7 @@ public:
      *
      *
      *  if \a node is nullptr, inserts \a insNode in the very begin (as the head)
-     *  If \a insNode is nullptr, an expection is raised
+     *  If \a insNode is nullptr, an exception is raised
      *
      *  <b style='color:orange'>Must be implemented by students</b>
      */    
@@ -271,7 +269,7 @@ public:
 #ifdef IWANNAGET10POINTS
 
     /** \brief Cuts all nodes with value that is equal to \a val and returns an
-     *  array of cutted nodes.
+     *  array of cut nodes.
      *
      *  For parameters, return value and special behavior description, see findAll()
      *
