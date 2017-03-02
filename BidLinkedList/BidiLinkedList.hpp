@@ -345,8 +345,8 @@ BidiLinkedList<T>::findAll(Node* startFrom, const T& val, int& size)
 
     while (startFrom)
     {
-        if (startFrom->_val == val) { // Array is not initialized
-            if (!res)
+        if (startFrom->_val == val) {
+            if (!res) // Array is not initialized
                 res = new Node*[getSize()];
 
             // Add matched node to the array of results
