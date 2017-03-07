@@ -105,17 +105,20 @@ int main(int argc, char* argv[])
 
         std::cout << "\nHere are all the cars that visited the lot today:\n";
 
-        // TODO: Output the license plates of all the
-        // cars that visited the lot, in alphabetical order		
+        // Sort the car's licences
+        std::sort(cars.begin(), cars.end());
 
-
-
-
-
+        // Output the license plates of all the
+        // cars that visited the lot, in alphabetical order
+        for (Cars::iterator it = cars.begin(); it != cars.end(); ++it)
+        {
+            std::cout << it->getPlate() << " moved " << it->getTimesMoved() << " times" << std::endl;
+        }
 
         return EXIT_SUCCESS;        
     }
-    catch (std::exception& e) {
+    catch (std::exception& e)
+    {
         std::cerr << e.what() << std::endl;
     }
     catch (...) {
@@ -137,25 +140,25 @@ void handle_arrival(Cars& cars, Parking& parking_lot,
 {
     // Iterate through the vector of stacks, looking for
     // the first stack that does not contain three cars
-    for (size_t i = 0; i < parking_lot.size(); ++i)
+    int i;
+    for (i = 0; i < parking_lot.size(); ++i)
     {
         // Check if this row
         // has empty lots full
-        if (parking_lot.at(i).size() != 3)
+        if (parking_lot[i].size() != PARKING_SPOTS_PER_AISLE)
         {
             // Park the car
-            parking_lot.at(i).push(plate);
+            parking_lot[i].push(plate);
 
             // Add the car to the collection of cars
             cars.push_back(Car(plate, i));
 
-            // Break the loop
-            break;
+            // Return from the method
+            return;
         }
     }
 
-    if (it == parking_lot.end())
-        throw std::logic_error("Unable to park the car: parking is full!");
+    std::cout << "Unable to park the car: parking is full!" << std::endl;
 }
 
 //------------------------------------------------------------------------------
@@ -169,15 +172,48 @@ void handle_arrival(Cars& cars, Parking& parking_lot,
  */
 void handle_departure(Cars& cars, Parking& parking_lot, const std::string& plate)
 {
-    // TODO: Handle car departures
+    // Utility stack to store the cars blocking
+    // the one which is about to leave the parking
+    ParkAisle buffer_zone;
 
+    // Find the car and its aisle on the parking
+    Car& car_departing = find_car(cars, plate);
+    int aisle = car_departing.getAisle();
 
+    // Move the blocking car to the buffer zone
+    // in order to let the departing car leave the parking
+    while (parking_lot[aisle].top() != plate)
+    {
+        // Move the blocking car to the buffer zone
+        Car current_car = parking_lot[aisle].top();
+        buffer_zone.push(current_car.getPlate());
 
+        // Remove it from the stack of parked cars
+        parking_lot[aisle].pop();
 
+        // Move to the next car
+    }
 
+    // Printout the info about departing car
+    std::cout << car_departing.getPlate() + " moved " << car_departing.getTimesMoved() << " times" << std::endl;
 
+    // The car leaves the parking
+    parking_lot[aisle].pop();
 
+    // Park the cars from the buffer zone back
+    while (!buffer_zone.empty())
+    {
+        // Park the vehicle
+        std::string& current_plate = buffer_zone.top();
+        parking_lot[aisle].push(current_plate);
 
+        // Increment times moved value
+        Car& current_car = find_car(cars, buffer_zone.top());
+        current_car.setTimesMoved(current_car.getTimesMoved() + 1);
+
+        // Remove the car from the buffer zone
+        buffer_zone.pop();
+    }
 }
 
 
