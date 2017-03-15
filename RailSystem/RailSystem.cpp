@@ -140,11 +140,14 @@ pair<int, int> RailSystem::calc_route(string from, string to)
 
 string RailSystem::recover_route(const string& city)
 {
-    // Add destination city
-    string route = " to " + city;
+    if (cities[city]->from_city == "")
+        return city;
 
     // Create iteration city pointer
     City* current_city = cities[cities[city]->from_city];
+
+    // Add destination city
+    string route = " to " + city;
 
     // Walk backwards through the cities
     // container to recover the route we found
