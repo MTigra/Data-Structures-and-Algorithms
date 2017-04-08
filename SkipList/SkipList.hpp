@@ -169,13 +169,9 @@ typename SkipList<Value, Key, numLevels>::TypeNode * SkipList<Value, Key, numLev
     while(current_node->m_next->m_key < key && current_node->m_next != this->m_pPreHead)
         current_node = current_node->m_next;
 
-    // Check if the next node key is correct
-    if (current_node->m_next->m_key == key)
-        return current_node;
-
     // If there is no node with the
     // defined key in the list
-    return this->m_pPreHead;
+    return current_node;
 }
 
 template <class Value, class Key, int numLevels>
