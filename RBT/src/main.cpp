@@ -23,11 +23,12 @@ void simplestTest()
 
     // просто создаем объект дерева
     RBTree<int> tree1;
-    tree1.setDumper(new RBTreeDefDumper<int, std::less<int> >("/Users/Nikita_Marinosyan/Desktop/BRT/scripts/log.txt",
-                                                              "/Users/Nikita_Marinosyan/Desktop/BRT/scripts/"));
-    tree1.insert(4);
+    tree1.setDumper(new RBTreeDefDumper<int, std::less<int> >("/Users/Nikita_Marinosyan/Desktop/Data-Structures-and-Algorithms/RBT/scripts/log.txt",
+                                                              "/Users/Nikita_Marinosyan/Desktop/Data-Structures-and-Algorithms/RBT/scripts/"));
+    tree1.insert(10);
     tree1.insert(5);
     tree1.insert(6);
+    tree1.insert(3);
 }
 
 

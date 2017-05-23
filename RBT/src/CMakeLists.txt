@@ -1,6 +1,6 @@
 add_executable(rbtree
-        rbtree.hpp
         main.cpp
         rbtree.h
+        rbtree.hpp
         def_dumper.h
 )

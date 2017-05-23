@@ -54,8 +54,6 @@ public:
 #ifdef RBTREE_WITH_DELETION
         DE_AFTER_BST_REMOVE,            ///< После удаления элемента из BST без перебалансировки.
         DE_AFTER_REMOVE,                ///< После удаления элемента из RBT и перебалансировки.
-
-        // TODO: сюда при желании можно добавить события, связанные с перекрасной при удалении
 #endif
     };
 public:
@@ -297,7 +295,8 @@ public:
      *
      *  Если соответствующего ключа нет в дереве, генерирует исключительную ситуацию \c std::invalid_argument.
      */
-    void remove(const Element& key);   
+    void remove(const Element& key);
+
 #endif
 
     /** \brief Ищет элемент \c key в дереве и возвращает соответствующий ему узел. 

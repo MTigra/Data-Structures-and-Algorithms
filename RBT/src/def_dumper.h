@@ -273,7 +273,6 @@ protected:
             return INFOS_ROT3G;
         //}
 
-
     };
 
 
