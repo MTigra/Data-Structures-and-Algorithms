@@ -1,8 +1,1 @@
-RBTree Event Log opened
------------------------
-BST Insert [4] #    0
-RBT Insert [4] #    1
-BST Insert [5] #    2
-RBT Insert [5] #    3
-BST Insert [6] #    4
-RBT Insert [6] #    5
+
