@@ -1,1 +1,12 @@
-
+RBTree Event Log opened
+-----------------------
+BST Insert [10] #    0
+RBT Insert [10] #    1
+BST Insert [5] #    2
+RBT Insert [5] #    3
+BST Insert [6] #    4
+Rot Left [5] #    5
+Rot Right [10] #    6
+RBT Insert [6] #    7
+BST Insert [3] #    8
+RBT Insert [3] #    9
