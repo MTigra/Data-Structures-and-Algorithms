@@ -1,5 +1,16 @@
-set(core_SRCS main.cpp)
-
-add_library(core ${core_SRCS})
-add_executable(exe main.cpp NetActivity.cpp TimeStamp.cpp JournalNetActivity.hpp OrderedList.hpp SkipList.hpp)
-target_link_libraries(exe core)
+add_executable(cyber_police_main 
+    main.cpp
+#   auxiliary
+    time_stamp.h
+    time_stamp.cpp
+# lists
+    ordered_list.h
+    ordered_list.hpp
+    skip_list.h
+    skip_list.hpp
+#   list application
+    net_activity.h
+    net_activity.cpp
+    journal_net_activity.h
+    journal_net_activity.hpp
+)
